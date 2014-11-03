@@ -1,0 +1,237 @@
+html body nav {
+  width: 93%;
+  margin: 0 auto;
+  font-family: Trebuchet MS;
+  font-size: 20px; 
+}
+
+
+
+body {
+  font-family: 'Verdana';
+}
+section#generate_report{
+  padding: 2.5em;
+  background-color: #fafafa;
+  width: 93%;
+  min-width: 62.5em;
+  margin: 3em auto;
+  height:   58em;
+}
+/*section#generate_report table td.tdiframe{
+  margin :50;
+   margin-left: 3em auto;
+}*/
+/*section#generate_report div table td.tdiframe iframe.textiframe {
+ width :100%;
+ overflow:auto;
+
+}*/
+section#generate_report div.select_tabs {
+   width: 100%;
+   border:1px;
+   vertical-align: top;
+
+}
+section#generate_report table td.select_param {
+   width: 100%;
+   border:1px;
+   vertical-align: top;
+
+}
+section#generate_report table td.empty {
+   text-indent:-5400px;
+   width:40px;
+
+}
+
+
+/*html body nav {
+  width: 90%;
+  margin: 0 auto;
+}
+html body nav span#welcome {
+  display: block;
+  padding-top: 2.5em;
+  padding-right: 1.5em;
+  font-size: .8em;
+}
+html body section {
+  width: 80%;
+  min-width: 58em;
+  margin: .5em auto;
+  text-align: center;
+}
+html body section .panel-heading {
+  padding-left: 2em;
+  line-height: 1.5;
+  text-align: left;
+  background-color: #eee;
+}
+html body section#generate_report {
+  margin-top: 5em;
+}
+html body section#generate_report .btn {
+  display: inline-block;
+  margin: .5em 1em;
+  width: 15em;
+  height: 15em;
+  white-space: normal;
+  vertical-align: middle;
+  padding-top: 5.5em;
+}
+html body section#generate_report .btn .span_cr {
+  display: block;
+  font-size: 0.9em;
+}
+html body section#generate_report .btn .span_us {
+  display: block;
+  font-size: 1.3em;
+}
+html body section#sent_list .sent_list_item, #draft_list .sent_draft_item, #received_list .received_list_item, #unsent_list .unsent_list_item {
+  position: relative;
+  list-style: none;
+  text-align: left;
+}
+html body section#received_list .received_list_item{
+  position: relative;
+  list-style: none;
+  text-align: left; 
+}
+html body section#received_list .received_list_item .item_platform{
+  display: inline-block;
+  width: 20%;
+}
+html body section#received_list .received_list_item .item_from{
+  display: inline-block;
+  width: 15%;
+}
+html body section#received_list .received_list_item .item_release{
+  display: inline-block;
+  width: 6%;
+}
+html body section#received_list .received_list_item .item_domain{
+  display: inline-block;
+  width: 6%;
+}
+html body section#received_list .received_list_item .item_subject{
+  display: inline-block;
+  width: 47%; 
+  text-align: left;
+}
+html body section#received_list .received_list_item .item_opt{
+  display: inline-block;
+  width: 5%;
+}
+html body section#draft_list .sent_draft_item .item_for_date {
+  display: inline-block;
+  width: 15%;
+}
+html body section#draft_list .sent_draft_item .item_release {
+  display: inline-block;
+  width: 12%;
+}
+html body section#draft_list .sent_draft_item .item_domain {
+  display: inline-block;
+  width: 12%;
+}
+html body section#draft_list .sent_draft_item .item_platform {
+  display: inline-block;
+  width: 25%;
+}
+html body section#draft_list .sent_draft_item .item_subject {
+  display: inline-block;
+  width: 15%;
+}
+html body section#draft_list .sent_draft_item .item_opt {
+  display: inline-block;
+  width: 5%;
+}
+html body section#draft_list .sent_draft_item .item_remove {
+  display: inline-block;
+  width: 0%;
+}
+html body section#sent_list .sent_list_item .item_for_date {
+  display: inline-block;
+  width: 15%;
+}
+html body section#sent_list .sent_list_item .item_release {
+  display: inline-block;
+  width: 12%;
+}
+html body section#sent_list .sent_list_item .item_domain {
+  display: inline-block;
+  width: 12%;
+}
+html body section#sent_list .sent_list_item .item_platform {
+  display: inline-block;
+  width: 25%;
+}
+html body section#sent_list .sent_list_item .item_subject {
+  display: inline-block;
+  width: 31%;
+}
+html body section#unsent_list .unsent_list_item .item_email {
+  display: inline-block;
+  width: 40%;
+}
+html body section#unsent_list .unsent_list_item .item_for_date {
+  display: inline-block;
+  width: 20%;
+}
+html body section#unsent_list .unsent_list_item .item_rel {
+  display: inline-block;
+  width: 15%;
+}
+html body section#unsent_list .unsent_list_item .item_domain {
+  display: inline-block;
+  width: 12%;
+}
+html body section#unsent_list .unsent_list_item .item_name {
+  display: inline-block;
+  width: 31%;
+}
+html body section#unsent_list .unsent_list_item .item_prime {
+  display: inline-block;
+  width: 21%;
+
+}
+html body section#unsent_list .unsent_list_item .item_subject {
+  display: inline-block;
+  width: 25%;
+}
+html body section #div_add_more .label-info{
+  cursor: pointer;
+}
+html body #modal-show-mail .modal-dialog {
+  width: 90%;
+}
+
+html body #modal-show-mail .modal-body {
+  background-color: #efefef;
+  padding: .5em;
+  width: 100%;
+  overflow: auto;
+}
+html body #modal-show-mail .modal-body > p > span {
+  display: inline-block;
+  font-size: .8em;
+}
+html body #modal-show-mail .modal-body > p > span.item {
+  font-weight: bold;
+  width: 4em;
+}
+html body #modal-show-mail .modal-body .mail-body  {
+  display: block;
+  position: relative;
+  padding: 1em;
+  background-color: #fff;
+  margin: 0;
+  width: auto;
+  display: inline-block;
+  box-shadow: 1px 1px 5px 0px #aaa inset;
+  margin-right: .5em;
+  min-width: 96%;
+  min-height: 20em;
+}
+*/

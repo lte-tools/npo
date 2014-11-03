@@ -1,0 +1,31 @@
+A = $_GET()
+https://10.9.35.58:8443/maat/report?reporttemplate=A&otype=ENODEB&eids=eNB64_END
+
+reporttemplatename : 
+otype  : ENODEB, CELLLTE
+eids : 
+firstdate:
+seconddate:
+
+https://lr13stnpo:8443/maat/report?reporttemplatename=LR13_ALU_20140814_END&otype=ENODEB&eids=eNB64_END&techno=LTE&periodicity=h&firstdate=2014.10.27 00.00&tz=Asia/Shanghai&format=CSV&seconddate=2014.10.27 00.00&objectsPosition=row&datesPosition=column&functionsPosition=groupedColumn
+
+======ok=============
+sh eql.sh 10.9.35.58 report -u 'npouser1:Alcatel&1' -o /mnt/share/eql/2.csv reporttemplatename=LR13_ALU_20140814_END otype=ENODEB eids=eNB64_END periodicity=h firstdate=2014.10.27:00.00 seconddate=2014.10.27:01.00 tz=Asia/Shanghai format=csv
+
+===========NOT OK with style======
+sh eql.sh 10.9.35.58 report -u 'npouser1:Alcatel&1' -o /mnt/share/eql/4.csv reporttemplatename=LR13_ALU_20140814_END otype=ENODEB eids=eNB64_END periodicity=h firstdate=2014.10.27:00.00 seconddate=2014.10.27:01.00 objectsPosition=row datesPosition=column functionsPosition=groupedColumn tz=Asia/Shanghai format=CSv
+
+
+	var a = '/mnt/share/eql';
+	var ls    = child_process.spawn('ls', ["-l", a]);
+	ls.stdout.on('data', function (data) {
+		console.log('stdout: ' + data);
+	});
+
+	ls.stderr.on('data', function (data) {
+		console.log('stderr: ' + data);
+	});
+
+	ls.on('exit',function (code){
+		console.log('command complete!');
+	});

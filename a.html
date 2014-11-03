@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate" />
+    <meta http-equiv="Expires" content="0" />
+    <link href="//172.24.186.191/jslib/jquery-ui/css/smoothness/jquery-ui.base.css" rel="stylesheet" />
+    <link href="css/choisedialog.css" rel="stylesheet" />
+    <style>
+      * {margin: 0; padding: 0; border-style: none; border-width: 0; border-collapse: collapse;}
+      html, body {width: 100%; height: 100%;}
+      body {font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";  font-size: 62.5%; overflow: auto; -webkit-text-size-adjust: none;}
+      #tabs {background: transparent;  height: 100%; width: 100%; padding: 0; margin: 0; border-style: none;}
+      #tabs ul#tabs_header {background: transparent; border-style: none; border-bottom: 1px solid #c0c0c0; -moz-border-radius: 0px; -webkit-border-radius: 0px; border-radius: 0px; font-size: 1.4em;}
+      #tabs ul#tabs_header .ui-state-default { background: transparent; border-style: none; float: right;}
+      #tabs ul#tabs_header .ui-state-active {  background: transparent url(css/img/uiTabsArrow.png) no-repeat bottom center;  border-style: none;}
+      #tabs ul#tabs_header .ui-state-default a {  color: #c0c0c0;}
+      #tabs ul#tabs_header .ui-state-active a {  color: #459e00;}
+      #tabs .tabs_panel {  padding: 0;margin: 0; }
+
+      table#win {width: 100%;}
+      #selection {border-right: solid 1px #EEE;  width: 220px;  background-color: #eFe2bF;  vertical-align: top;}
+      #select_tabs {font-family: "Trebuchet MS"; background: transparent;  height: 100%;  padding: 0; margin: 0; font-size: 1em; border-style: none;}
+      #select_tabs ul.ui-widget-header {background: #FFF; border-style: none; border-bottom: 1px solid #c0c0c0; -moz-border-radius: 0px; -webkit-border-radius: 0px; border-radius: 0px; font-size: 1.2em; line-height: 1; padding-top: 0;}
+      #select_tabs ul li.ui-tabs-active {background: #EFE2BF;}
+      #select_tabs .ui-tabs {padding: 0;margin: 0;}
+      #select_tabs .ui-tabs-panel {  padding: 0;margin: 0;}
+
+      #select_tabs button {display: inline; font-size: 1em; margin: .3em .3em;}
+      #select_tabs div p {text-align: left;  font-size: 1.2em;  padding: 1.5em .3em .3em .3em;}
+      #select_tabs div div {text-align: center; background-color: #fFf2cF;}
+      #select_tabs div#date_sel input {font-size: 1.2em; padding: .1em .2em; margin: .3em; width: 5.5em; cursor: pointer;}
+      #select_tabs div a {display: block;  font-size: 1.1em; margin: .5em;}
+      #select_tabs div#platform_sel .ui-accordion-header {font-size: .9em}
+      #select_tabs div#platform_sel .ui-accordion-content {padding: .1em; height: 70px;}
+
+      #select_tabs div#load_sel_div {max-height: 150px; overflow: auto;}
+      #select_tabs div#report_sel_div {max-height: 180px; overflow: auto;}
+
+      #win #tdframe {height: 100%;}
+      #report_frame_table {width: 100%; height: 100%;}
+      
+      #report_frame_toolbar_td {height: 20px; padding: 0; padding-right: 15px; text-align: right; background-color: #F9F9F9;}
+      #report_frame_toolbar_td img {width: 15px; height: 15px; margin: 1.8px 8px ; cursor: pointer;}
+      #report_frame_iframe_td iframe {width: 100%; height: 100%;}
+
+      div.setup_div h1 { font-size: 1.2em; margin: .6em 0;}
+      div.setup_div { margin: 20px; }
+      div.setup_div table { margin: 1em 0; min-width: 400px; max-width: 900px; }
+      div.setup_div table td, 
+      div.setup_div table th { border: 1px solid #eee; padding: .6em 10px; }
+      div.setup_div tbody td {cursor: pointer;}
+      div.modify_dialog input,
+      div.modify_dialog label,
+      div.modify_dialog select {display: block;}
+      div.modify_dialog input,
+      div.modify_dialog select {margin-bottom: 12px; width: 95%; padding: .4em;}
+      div.modify_dialog fieldset {margin-top: 20px;}
+    </style>
+    <!--[if IE]>
+    <style>
+    </style>
+		<![endif]-->
+ </head>
+  <body>
+    <div id="tabs">
+      <ul id="tabs_header">
+        <li><a href="#tab-report">Report</a></li>
+        <li><a href="#tab-setup">Setup</a></li>
+      </ul>
+      <div id="tab-report" class="tabs_panel">
+        <table id="win"><tr>
+            <td id="selection">
+              <div id="select_tabs">
+                <ul>
+                  <li><a href="#tab_sel_date">By Date</a></li>
+                  <li><a href="#tab_sel_load">By Load</a></li>
+                </ul>
+                <div id="tab_sel_date">
+                  <p> Choose date: </p>
+                  <div id="date_sel">
+                    <button class='def' delta="0">today</button>
+                    <button class='def' delta="-1">yesterday</button><br />
+                    other:<input id="datepicker" />
+                  </div>
+                  <p> Choose platform: </p><div id="platform_sel"></div>
+                  <p> Choose report: </p><div id="report_sel"></div>
+                  <p> Run CI: </p>
+                  <div id="run_ci">
+                  	
+                  	<!--change1 note button id='runci' -->
+                   	<!-- <button id='runci'> Run LR13 CI </button>-->
+                   	<!--change2 note button id='runci_TLA6'-->
+                   	<!--<button id='runci_TLA6'> Run TLA6.0 CI </button>-->
+  
+                    <button id='runrelease'>Choose Release </button>
+                    <p id='ciresult'></p>
+                  </div>
+                </div>
+                <div id="tab_sel_load">
+                  <p> Choose Release: </p><div id="rel_sel_div"> </div>
+                  <p> Choose Load Version: </p><div id="load_sel_div"> </div>
+                  <p> Choose report: </p><div id="report_sel_div"> </div>
+                </div>
+              </div>
+            </td>
+            <td id="tdframe">
+              <table id="report_frame_table">
+                <tr id="report_frame_toolbar_tr"><td id="report_frame_toolbar_td">
+                    <img id="icon-refresh" src="//172.24.186.191/img/iphone/refresh.png" />
+                    <img id="icon-back" src="//172.24.186.191/img/iphone/left.png" />
+                    <img id="icon-forward" src="//172.24.186.191/img/iphone/right.png" />
+                </td></tr>
+                <tr><td id="report_frame_iframe_td">
+                    <iframe id="reportdisplay" name="reportdisplay" frameBorder="0" src='logo.html'></iframe>
+                    
+                </td></tr>
+              </table>
+            </td>
+        </tr></table>
+      </div>
+      <div id="tab-setup" class="tabs_panel">
+        <div id="platform_setup_div" class="ui-widget setup_div">
+          <h1>Platforms</h1>
+          <table id="setup_platform_display" class="ui-widget ui-widget-content setup_display"><thead><tr class="ui-widget-header">
+                <th>Name</th>
+                <th>Release</th>
+                <th>CI URL</th>
+                <th>Daily CI</th>
+                <th>D Version</th>
+                <th>Info</th>
+          </tr></thead><tbody></tbody></table>
+        </div>
+        <div id="release_setup_div" class="ui-widget setup_div">
+          <h1>Release</h1>
+          <table id="setup_release_display" class="ui-widget ui-widget-content setup_display"><thead><tr class="ui-widget-header">
+                <th>Name</th>
+          </tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </div><div id="divPop" class="pop" title="" style="display:none; border:solid 1px #000000; position: absolute;" >
+  <div>
+    <img src="logo-cireport.jpg"  alt="logo" width="210" height="60" align= 'justify' width="15%"/>
+  </div>
+</div>
+  </body>
+</html>
+<div id="platform-modify-dialog" class="modify_dialog" title="" style="display:none;">
+  <fieldset>
+    <label for="name">Name</label>
+    <input type="text" name="name" class="text ui-widget-content ui-corner-all" />
+    <label for="release">Release</label>
+    <select name="release" class="ui-widget-content ui-corner-all"></select>
+    <label for="ciurl">CI URL</label>
+    <input type="text" name="ciurl" class="text ui-widget-content ui-corner-all" />
+    <label for="ciurl">Join Daily CI</label>
+    <select name="dailyci" class="ui-widget-content ui-corner-all">
+      <option value="Y">Yes</option>
+      <option value="N">No</option>
+    </select>
+    <div id='dversion' style="display:none">
+      <label for="dversion">D Version</label>
+      <input type="text" name="dversion" class="text ui-widget-content ui-corner-all"/>
+    </div>
+    <label for="ciurl">Info</label>
+    <input type="text" name="info" class="text ui-widget-content ui-corner-all" />
+  </fieldset>
+</div>
+<div id="release-modify-dialog" class="modify_dialog" title="" style="display:none;">
+  <fieldset>
+    <label for="name">Name</label>
+    <input type="text" name="name" class="text ui-widget-content ui-corner-all" />
+  </fieldset>
+</div>
+
+<script src='//172.24.186.191/jslib/json2.js'></script>
+<script src='//172.24.186.191/jslib/jquery/jquery-1.8.3.js'></script>
+<script src='//172.24.186.191/jslib/jquery-ui/js/jquery-ui-1.9.2.custom.min.js'></script>
+<script src='js/uti.js'></script>
+<script src='js/report.js'></script>
+<script src='js/reportdisplay.js'></script>
+<script src='js/choisedialog.js'></script>
+<script src='js/runci.js'></script>
+<script src='js/platform.js'></script>
+<script src='js/release.js'></script>
+<script src='js/setupmanager.js'></script>
+<script src='js/setup_release.js'></script>
+<script src='js/setup_platform.js'></script>
+<script src='js/index.js'></script>
+
+
