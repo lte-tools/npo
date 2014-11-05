@@ -23,13 +23,13 @@ define(['model/query.model'], function (query) {
       var secondDate = $(document).find('#second-date').val();
       var ruleTemplate = $(document).find('#rule-name').val();
       var data = {
-        reporttemplate:templateName,
-        otype:otype,
-        eid:eid,
-        firstdate:firstDate,
-        seconddate:secondDate,
-        ruletemplate:ruleTemplate
-      }
+        reporttemplate: templateName,
+        otype: otype,
+        eid: eid,
+        firstdate: firstDate,
+        seconddate: secondDate,
+        ruletemplate: ruleTemplate
+      };
 
       query.ajaxGet('/submit', data, function (r) {
         if (r.result === 'ok') {
