@@ -1,5 +1,5 @@
 'use strict';
-
+var async = require('async');
 var
   connection = require('./db.model').connection,
   mongoose = require('mongoose'),
@@ -20,7 +20,7 @@ var
 
 
 
-var queryRuleByID = function(id, length, rules, tabledata) {
+var queryRuleByID = function(id, length, rules, next) {
   if(length !== 0){
     Rule
       .find({'_id': id[length - 1]}, 'casename rule')
@@ -30,13 +30,12 @@ var queryRuleByID = function(id, length, rules, tabledata) {
         } else {
           rules.push(data[0]);
         }
-        queryRuleByID (id, length - 1, rules, tabledata);
-      });
-      
+        queryRuleByID (id, length - 1, rules, function (from) {
+           next(from);
+        }); 
+      });      
   } else {
-    console.log('rules:');
-    console.log(rules);
-    analyzeData(tabledata, rules);
+    next(rules);
   }
 }
 
@@ -88,7 +87,6 @@ var analyzeData = function (tabledata,rules) {
               console.log('illegal rule');
           }
         }
-        console.log('outSign:'+ outSign);
         if(outSign){
             outData.push(tabledata[i]);
             break;
@@ -96,8 +94,7 @@ var analyzeData = function (tabledata,rules) {
       }
     }
   }
-  console.log('outdata:'+outData);
-  
+  return outData;
 };
 
 var compareValue = function (arg1, law, arg2) {
@@ -112,7 +109,7 @@ var compareValue = function (arg1, law, arg2) {
     value1 = parseFloat(arg1);
     value2 = parseFloat(arg2);
   }
-  console.log('value 1, law, value2:'+value1 + law + value2);
+
   switch(law){
     case '>>':
       if(value1 > value2) {
@@ -156,21 +153,46 @@ var compareValue = function (arg1, law, arg2) {
   return false;
 }
 
-
-exports.queryTemplateByName = function (tempName, tabledata) {
-  Template
-    .find({'templatename': tempName}, 'rule_collect')
-    .exec(function (err, data) {
-      if (err) {
-        console.log(err);
+exports.queryTemplateByName = function (tempName, tabledata,next) {
+  async.waterfall([
+    function(callback){
+     Template
+        .find({'templatename': tempName}, 'rule_collect')
+        .exec(function (err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          var ruleArray = new Array();
+          if(!data[0]){
+            console.log('templatename error!');
+            next(null);
+          } else {
+            callback(null,data[0].rule_collect,data[0].rule_collect.length,ruleArray,tabledata);
+          }
+        }
+      });
+    },
+    function(id, length, rules, tabledata, callback){
+      var rules = new Array();
+      queryRuleByID(id, length, rules, function(result){
+        callback(null, result);
+      });
+    },
+  ],
+    function (err, result) {
+      if(result.length == 0) {
+        console.log('empty rules!');
+        next(null);
       } else {
-        var ruleArray = new Array();
-        queryRuleByID(data[0].rule_collect,data[0].rule_collect.length,ruleArray,tabledata);
+        var outData = analyzeData(tabledata , result);
+        next(outData);
       }
     });
 };
 
-exports.test = function () {
+exports.test = function (arg1,arg2) {
+  console.log(arg1);
+  console.log(arg2);
   Template
     .find({'templatename': 'temp1'}, '_id templatename rule_collect')
     .sort('templatename')

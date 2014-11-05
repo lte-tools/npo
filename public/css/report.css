@@ -5,46 +5,88 @@ html body nav {
   font-size: 20px; 
 }
 
-
+html body #modal-select-template .modal-body  {
+  display: block;
+  position: relative;
+  margin: 0;
+  width: auto;
+  display: inline-block;
+  margin-right: .5em;
+  min-width: 96%;
+  min-height: 20em;
+}
 
 body {
-  font-family: 'Verdana';
+  font-family: Verdana;
 }
-section#generate_report{
+section#filter-items{
   padding: 2.5em;
   background-color: #fafafa;
   width: 93%;
   min-width: 62.5em;
   margin: 3em auto;
   height:   58em;
-}
-/*section#generate_report table td.tdiframe{
-  margin :50;
-   margin-left: 3em auto;
-}*/
-/*section#generate_report div table td.tdiframe iframe.textiframe {
- width :100%;
- overflow:auto;
 
-}*/
-section#generate_report div.select_tabs {
+}
+
+section#filter-items div.select_tabs {
    width: 100%;
    border:1px;
    vertical-align: top;
-
 }
-section#generate_report table td.select_param {
+
+section#filter-items table td.select_param {
    width: 100%;
    border:1px;
    vertical-align: top;
+}
+section#filter-items table td.template_example {
+ color: #00509e;
+}
+section#filter-items table td.create_template {
+ color: #00509e;
 
 }
-section#generate_report table td.empty {
+
+section#filter-items table td div.input-group{
+   width:60%;
+   border:1px;
+   vertical-align: top;
+}
+section#filter-items table td div#input_left{
+   width:100%;
+   border:1px;
+   vertical-align: top;
+}
+section#filter-items table td div#input_right{
+   width:100%;
+   border:1px;
+   vertical-align: top;
+}
+
+section#filter-items table td div.input-group input#examp_tmp_name_input {
+   width:45.5%;
+   border:1px;
+   vertical-align: top;
+}
+section#filter-items table td div.input-group input#creat_tmp_name_input {
+   width:72.5%;
+   border:1px;
+   vertical-align: top;
+}
+section#filter-items table td div.examp_tmp_name_input {
+
+   border:1px;
+   vertical-align: top;
+}
+
+section#filter-items table td.empty {
    text-indent:-5400px;
    width:40px;
-
 }
-
+section#filter-items table td div#text_area textarea {
+ color:#A8A8A8 ;
+}
 
 /*html body nav {
   width: 90%;
@@ -220,18 +262,5 @@ html body #modal-show-mail .modal-body > p > span {
 html body #modal-show-mail .modal-body > p > span.item {
   font-weight: bold;
   width: 4em;
-}
-html body #modal-show-mail .modal-body .mail-body  {
-  display: block;
-  position: relative;
-  padding: 1em;
-  background-color: #fff;
-  margin: 0;
-  width: auto;
-  display: inline-block;
-  box-shadow: 1px 1px 5px 0px #aaa inset;
-  margin-right: .5em;
-  min-width: 96%;
-  min-height: 20em;
-}
-*/
+}*/
+

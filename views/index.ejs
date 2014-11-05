@@ -15,91 +15,127 @@
 	<style type="text/css"></style>
 </head>
 <body>
-
-<!-- <script src = "../public/javascripts/input.js" ></script> -->
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-   <div class="container-fluid">
-   
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">NPO Viewer</a>
-    </div>
-    
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Generate report</a></li>
-        <li><a href="/import_template">Import template</a></li>
-        <li><a href="/help">Help</a></li>
-      </ul>
-  </div>
-</div> 
-</nav>
-	<section id= "generate_report" class = "panel panel-default" >
-<table id ="table">
-	<tr >
-		<td  class="select_param">
-
-<!-- <div class="labels"> 
-	<ul class="nav nav-pills">
-		<li class="active"><a href="#" >generate report</a></li>
-		<li class="active"><a href="#" >import template
-			<span class="badge">20</a></span></li>
-</ul><br>
-	<li class="label label-primary"><a href="#" >By Date</a></li>
-	<li class="label label-primary"><a href="#" >By Date</a></li>
-</div> -->
-<div id="select_tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all" >
-<form id = "select_param" action="submit" method="get" >
-<p><label for= "reporttemplatename">Report template name:</label><br>
-<input type="text"  class="form-control input-sm" name="reporttemplate"></p>
-
-<p><label for= "type">Type:</label><br>
-<input type="text"  class="form-control input-sm" name="type"></p>
-
-<p><label for= "eids">Eids:</label><br>
-<input type="text" class="form-control input-sm"  name="eids"></p>
-
-<p><label for= "firstdate">First date: </label><br>
-<input type="text" class="form-control input-sm"  name="firstdate"></p>
-<p><label for= "seconddate">Second date: </label><br>
-<input type="text"  class="form-control input-sm" name="seconddate"></p>
-<!-- <p><label for= "case_name">Rule template name: </label><br>
-<input type="text"  class="form-control input-sm" name="case_name"></p> -->
-</form></br>
-<button class = "btn btn-primary" id= "choose_templ" >choose template</button><br></br>
-<button class = "btn btn-primary" id= "gene_report" >generate report </button>
-</div>
-
-</td>
-	<td  class="empty" >hel
-	</td>
-		<td class= "tdiframe" width="50%" heigth="100%" align = "center">
-		<iframe id = "tdiframe" class = "textiframe" name="report" frameBorder="5"  src="js/output.html" width = "980" height="760" margin = "10%"></iframe>
-		</td>
-	</tr>
-</table>
-</section>
-    <div class="modal fade" id="modal-show-template" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="text-align: center;">
-    <div class="modal-dialog" id="modal-dialog" >
-      <div class="modal-content" style="text-align: left;">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">x</a>
-          <h4 class="modal-title" id="myModalLabel">Mail</h4>
-        </div>
-        <div class="modal-body">
-          <p id="email">Loading...</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-<script data-main="/js/index.main" src='//172.24.186.245/jslib/requirejs/require-2.1.10.min.js'>
-</script>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">NPO Viewer</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Generate report</a></li>
+					<li><a href="/import_template">Import template</a></li>
+					<li><a href="/help">Help</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<section id= "filter-items" class = "panel panel-default" >
+		<table id ="table">
+			<tr>
+				<td  class="select_param">
+					<div id="select_tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all" >
+						<p><label for= "report-templatename">Report template name:</label><br>
+						<input type="text" id='template-name' class="form-control input-sm" name="report-template" value="LR13_ALU_20140814_END"></p>
+						<p><label for= "type">Type:</label><br>
+						<input type="text" value='ENODEB' id='otype' class="form-control input-sm" name="type"></p>
+						<p><label for= "eids">Eids:</label><br>
+						<input type="text" value='eNB59_END'id='eid' class="form-control input-sm" name="eids"></p>
+						<p><label for= "firstdate">First date: </label><br>
+						<input type="text" value = "2014.10.29:00.00" id='first-date' class="form-control input-sm"  name="firstdate"></p>
+						<p><label for= "seconddate">Second date: </label><br>
+						<input type="text" value = "2014.10.29:01.00"  id='second-date'  class="form-control input-sm" name="seconddate"></p>
+						<p><label for= "case_name">Rule template name: </label><br>
+						<input type="text" value="temp1" id='rule-name' class="form-control input-sm" name="select_temp_name"></p>
+						</br>
+						<!-- <button class = "btn btn-primary" id= "btn-select-template" >Choose Template</button><br></br> -->
+						<button class = "btn btn-primary" id= "btn-query-report" >Generate Report 
+						</button>
+					</div>
+				</td>
+				<td  class="empty" >111
+				</td>
+				<td class= "tdiframe" width="50%" heigth="100%" align = "center">
+					<iframe id = "iframe-outdata" class = "textiframe" name="iframe-outdata" frameBorder="5"  src="js/output.html" width = "980" style="background-color:white"; height="760" margin = "10%" >
+					</iframe>
+				</td>
+			</tr>
+		</table>
+	</section>
+	<div class="modal fade" id="modal-select-template" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="text-align: center;">
+		<div class="modal-dialog" id="modal-dialog" >
+			<div class="modal-content" style="text-align: left;">
+				<div class="modal-header">
+					<a class="close" data-dismiss="modal">x</a>
+					<h4 class="modal-title" id="myModalLabel">Select Template</h4>
+				</div>
+				<div class="modal-body">
+					<label class="col-sm-2 control-label">Template</label>
+					<div class="col-sm-10">
+						<select class="form-control input-sm">
+							<option>temp1</option>
+							<option>temp2</option>
+							<option>temp3</option>
+							<option>temp4</option>
+							<option>temp5</option>
+						</select>
+					</div>
+					<div class="col-sm-4">
+					</div>
+					<div class="col-sm-8">
+						<button type="button" id='btn-add-temp' class="btn btn-success btn-sm" >Add New...</button>
+						<button type="button" id='btn-modify-temp'class="btn btn-primary btn-sm" >Modify</button>
+						<button type="button" id='btn-del-temp' class="btn btn-danger btn-sm" >Delete</button>
+					</div>
+					<div id='temp_editor'>
+						<label for="tempName" class="col-sm-2 control-label">Template Name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="tempName" placeholder="Template Name">
+						</div>
+					</div>
+					<form class="form-inline" role="form">
+						<div class="form-group">
+							<label class="sr-only">Case Name</label>
+							<p class="form-control-static">Case Name</p>
+						</div>
+						<div class="form-group">
+							<label for="casename1" class="sr-only">Case Name</label>
+							<input type="text" class="form-control" id="casename1" placeholder="Case Name">
+						</div>
+						<button type="Submit" class="btn btn-default btn-sm">Add</button>
+					</form>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="force_output" value="option1">OUTPUT</label>
+							<div class="input-group">
+							 <div class="input-group-btn">
+							 	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Law <span class="caret"></span></button>
+							 	<ul class="dropdown-menu" role="menu">
+							 		<li><a href="#">></a></li>
+          							<li><a href="#">=</a></li>
+								    <li><a href="#">Action</a></li>
+								    <li><a href="#">!=</a></li>
+								    <li><a href="#">>=</a></li>
+								    <li><a href="#">=</a></li>
+								    <li class="divider"></li>
+								    <li><a href="#">Separated link</a></li>
+								</ul>
+							</div>
+							<input type="text" class="form-control">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</body>
+	<script data-main="/js/index.main" src='//172.24.186.245/jslib/requirejs/require-2.1.10.min.js'>
+	</script>

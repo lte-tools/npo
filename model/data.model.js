@@ -2,6 +2,7 @@ var child_process = require ('child_process');
 var fs = require ('fs');
 var config = require ('../config.js');
 var rule = require('./rule.model');
+var async = require('async');
 
 var getNowFormatDate = function () {
 	var day = new Date(); 
@@ -161,21 +162,56 @@ var processData = function (csvdata) {
 			}
 		}
 	}
-	console.log("tabledata:");
+/*	console.log("tabledata:");
 	console.log(tabledata);
-	rule.queryTemplateByName('temp1', tabledata);
+*/	return tabledata;
+	
+	
 };
 
 
-exports.run_cmd = function (reporttemplate,type,eids,firstdate,seconddate){
+exports.run_cmd = function (reporttemplate, type, eid, firstdate, seconddate, ruletemplate, next){
 	var timestamp = getNowFormatDate() + getNowFormatTime();
-	var cmd = "sh " + config.cmd.scriptFile + " " + config.cmd.serverIP +" report -u '" + config.cmd.username + ":" + config.cmd.password + "' -o " + config.csvFile.path + timestamp + ".csv reporttemplatename=" + reporttemplate + " otype=" + type + " eids=" + eids + " periodicity=h firstdate=" + firstdate + " seconddate=" + seconddate + " tz=" + config.cmd.timeZone + " format=csv";
-	child_process.exec(cmd, function (error, stderr, stdout) {
-		console.log('stdout: ' + stdout);
-		console.log('stderr: ' + stderr);
-    	if (error !== null) {
-    		console.log('exec error: ' + error);
-		}
-		readCSV(config.csvFile.path, timestamp + ".csv ");
+	var cmd = "sh " + config.cmd.scriptFile + " " + config.cmd.serverIP +" report -u '" + config.cmd.username + ":" + config.cmd.password + "' -o " + config.csvFile.path + timestamp + ".csv reporttemplatename=" + reporttemplate + " otype=" + type + " eids=" + eid + " periodicity=h firstdate=" + firstdate + " seconddate=" + seconddate + " tz=" + config.cmd.timeZone + " format=csv";
+	async.waterfall([
+		function(callback){
+			child_process.exec(cmd, function (error, stderr, stdout) {
+				console.log('stdout: ' + stdout);
+				console.log('stderr: ' + stderr);
+		    	if (error !== null) {
+		    		console.log('exec error: ' + error);
+		    		next(null);
+				}
+				callback(null);
+			})
+	    },
+	    function(callback){
+	    	fs.readFile(config.csvFile.path + timestamp + ".csv ", function (error, data){
+	    		if(error){
+	    			console.log('read file error!');
+	    			next(null);
+	    		} else {
+					var csvdata = new Array();
+					var csvrow = data.toString().split('\n');
+					var i; 
+					for(i = 0; i < csvrow.length - 1; i += 1) {
+						var csvspan = csvrow[i].split(',');
+						csvspan.length = csvspan.length - 1;
+						if(csvspan.length > 1)csvdata.push(csvspan);
+					};
+				callback(null,csvdata);	    			
+				}
+			})
+	    },
+	    function(csvdata,callback){
+	    	var tabledata = new Array();
+	    	tabledata = processData(csvdata);
+	        callback(null,tabledata);
+	    },
+	    function(tabledata, callback){
+	    	rule.queryTemplateByName(ruletemplate, tabledata, function (from) {callback(null, from);});
+	    }
+	], function (err, result) {
+		next(result);
 	});
-}
+};

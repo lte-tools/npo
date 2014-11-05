@@ -1,7 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<body>
-<p>hello</p>
-</body>
+	<title>NPO Viewer</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+	<meta charset='utf-8' />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache,must-revalidate" />
+	<meta http-equiv="Expires" content="0" />
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<link rel="stylesheet" href="http://172.24.186.245/jslib/bootstrap/bootstrap3.0.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://172.24.186.245/jslib/bootstrap/bootstrap3.0.3/dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="http://172.24.186.245/jslib/bootstrap/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/report.css">
+	<style type="text/css"></style>
 </head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">NPO Viewer</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li ><a href="/">Generate report</a></li>
+					<li  class="active" ><a href="/import_template">Import template</a></li>
+					<li><a href="/help">Help</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<section id= "filter-items" class = "panel panel-default" >
+		<table id ="table">
+			<tr>
+				<td  class="template_example" align="center">
+					<!-- <button class = "btn btn-primary" id= "btn-create-report" >Template Example:</button><br> -->
+					<h3 >Template Example:</h3>
+				</td>
+				<td  class="create_template" align="center">
+					<!-- <button class = "btn btn-primary" id= "btn-create-report" >Create Template</button><br> -->
+					<h3>Create Template:</h3>
+				</td>
+			<tr>
+				<td id="temp_name_left" >
+				
+						<div id="input_left" class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">Template Name:</button>
+							</span>
+							<input type="text" id = "examp_tmp_name_input"class="form-control" value="temp1">
+							<button class="btn btn-primary" type="button">Create Template</button>
+						</div>
+					
+				</td>
+				<td id="temp_name_right" >
+					<div id="input_right" class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">Template Name:</button>
+							</span>
+							<input type="text" id = "creat_tmp_name_input" class="form-control">
+							<button class="btn btn-primary" type="button">Create Template</button>
+						</div>
+				</td>
+			</tr>
+			</tr>
+			<tr>
+				<td>
+					<div id = "text_area">
+						<textarea id = "left_area"  wrap="virtual"  rows="33" cols="50" >_VS_UE_service_access_WithIaLTEHOtgt_succ_rate_a(L126b2_51_CI_avg)(No Unit),<<1,>>0.8,VS_RRC_cnx_succ_rate(L12302_11_CI)(%),>>95%,<<100%,VS_S1AP_cnx_estab_succ_rate(L12405_11_CI)(%),>>90%,<<100%,...
+						</textarea>
+					</div>
+				</td>
+				<td>
+					<div id = "text_area">
+						<textarea id = "right_area" onfocus="this.value=''; this.onfocus=null;" rows="33" cols="80">please create your template here:</textarea>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</section>
+</body>
+<script data-main="/js/template.import.main" src='//172.24.186.245/jslib/requirejs/require-2.1.10.min.js'>
+</script>
