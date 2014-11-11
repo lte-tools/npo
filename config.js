@@ -7,9 +7,12 @@ exports.cmd = {
 };
 
 exports.csvFile = {
-  path: '/mnt/share/eql/csvdata/'
+	path: '/mnt/share/eql/csvdata/'
 };
 exports.db = {
   url: 'mongodb://npoviewer:npoviewer@127.0.0.1:27017/npoviewer'
 };
+exports.outDataFile = {
+	path: '/mnt/share/test1/public/outdatafile/'
+}
 

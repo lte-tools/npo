@@ -1,10 +1,10 @@
 define(function () {
   'use strict';
   return {
-    ajaxGet :function (url, data, anddothis, object) {
+    ajax :function (url, type, data, anddothis, object) {
       $.ajax({
         url: url,
-        type: 'GET',
+        type: type,
         dataType: 'json',
         data: data
       }).done(function (result) {

@@ -24,7 +24,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">NPO Viewer</a>
+				<a class="navbar-brand" href="/">NPO Viewer</a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
@@ -36,54 +36,53 @@
 		</div>
 	</nav>
 	<section id= "filter-items" class = "panel panel-default" >
-		<table id ="table">
-			<tr>
-				<td  class="template_example" align="center">
-					<!-- <button class = "btn btn-primary" id= "btn-create-report" >Template Example:</button><br> -->
-					<h3 >Template Example:</h3>
-				</td>
-				<td  class="create_template" align="center">
-					<!-- <button class = "btn btn-primary" id= "btn-create-report" >Create Template</button><br> -->
-					<h3>Create Template:</h3>
-				</td>
-			<tr>
-				<td id="temp_name_left" >
-				
-						<div id="input_left" class="input-group">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">Template Name:</button>
-							</span>
-							<input type="text" id = "examp_tmp_name_input"class="form-control" value="temp1">
-							<button class="btn btn-primary" type="button">Create Template</button>
-						</div>
-					
-				</td>
-				<td id="temp_name_right" >
-					<div id="input_right" class="input-group">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">Template Name:</button>
-							</span>
-							<input type="text" id = "creat_tmp_name_input" class="form-control">
-							<button class="btn btn-primary" type="button">Create Template</button>
-						</div>
-				</td>
-			</tr>
-			</tr>
-			<tr>
-				<td>
-					<div id = "text_area">
-						<textarea id = "left_area"  wrap="virtual"  rows="33" cols="50" >_VS_UE_service_access_WithIaLTEHOtgt_succ_rate_a(L126b2_51_CI_avg)(No Unit),<<1,>>0.8,VS_RRC_cnx_succ_rate(L12302_11_CI)(%),>>95%,<<100%,VS_S1AP_cnx_estab_succ_rate(L12405_11_CI)(%),>>90%,<<100%,...
-						</textarea>
-					</div>
-				</td>
-				<td>
-					<div id = "text_area">
-						<textarea id = "right_area" onfocus="this.value=''; this.onfocus=null;" rows="33" cols="80">please create your template here:</textarea>
-					</div>
-				</td>
-			</tr>
-		</table>
+		<div id = "div-template-nav-tabs">
+			<ul id="ul-template-nav-tabs" class="nav nav-tabs" role= "tablist">
+				<li role="presentation" class="active"><a href="#">Create New Template</a></li>
+				<li role="presentation" ><a href="#">View Old Template</a></li>
+			</ul>
+		</div>
+		<div id="create-new-template" class="input-group">
+		<!-- 	<table>
+				<tr>
+					<td>
+						<p><label >New template name: </label>
+						<p><label>Report template name:</label>
+						<p><label>Type:</label>
+						<p><label>Eids:</label>
+						<p><label>First date: </label>
+						<p><label>Second date: </label>
+					</td>
+					<td>
+						<p><input type="text" value="test1" id='new-template-name' class="form-control input-sm" >
+						<p><input type="text" id='new-report-template-name' class="form-control input-sm" value="LR13_ALU_20140814_END">
+						<p><input type="text" value='ENODEB' id='new-otype' class="form-control input-sm">
+						<p><input type="text" value='eNB59_END'id='new-eid' class="form-control input-sm">
+						<p><input type="text" value = "2014.10.29:00.00" id='new-first-date' class="form-control input-sm">
+						<p><input type="text" value = "2014.10.29:01.00"  id='new-second-date'  class="form-control input-sm">
+					</td>
+				</tr>
+			</table>
+			<button class = "btn btn-primary" id= "btn-query-report" >Create New Template 
+			</button>
+			<br>
+			 --><br><br>
+			<nobr><p><label>New template name:</label>
+				<input type="text" value="test1" id='new-template-name' class="form-control input-sm" >
+			<p><label>Report template name:</label>
+				<input type="text" id='new-report-template-name' class="form-control input-sm" value="LR13_ALU_20140814_END">
+			<p><label>Type:</label>
+				<input type="text" value='ENODEB' id='new-otype' class="form-control input-sm"></p>
+			<p><label>Eids:</label>
+				<input type="text" value='eNB59_END'id='new-eid' class="form-control input-sm"></p>
+			<p><label>First date: </label>
+				<input type="text" value = "2014.10.29:00.00" id='new-first-date' class="form-control input-sm"></p>
+			<p><label>Second date: </label>
+				<input type="text" value = "2014.10.29:01.00"  id='new-second-date'  class="form-control input-sm"></p><br>
+			<p><button class = "btn btn-primary" id= "btn-import-template" >Import New Template</button>
+			<button class = "btn btn-primary" id= "btn-create-template" >Create New Template</button></nobr></p>
+		</div>
 	</section>
-</body>
-<script data-main="/js/template.import.main" src='//172.24.186.245/jslib/requirejs/require-2.1.10.min.js'>
-</script>
+	</body>
+	<script data-main="/js/template.import.main" src='//172.24.186.245/jslib/requirejs/require-2.1.10.min.js'>
+	</script>

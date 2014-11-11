@@ -28,8 +28,8 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Generate report</a></li>
-					<li><a href="/import_template">Import template</a></li>
+					<li ><a href="/">Generate report</a></li>
+					<li  class="active" ><a href="/import_template">Import template</a></li>
 					<li><a href="/help">Help</a></li>
 				</ul>
 			</div>
@@ -40,8 +40,10 @@
 			<tr>
 				<td  id = "input-param" >
 					<div id="select_tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all" >
-						<label for= "report-templatename">Report template name:</label><br>
-						<input type="text" id='template-name' class="form-control input-sm" name="report-template" value="LR13_ALU_20140814_END">
+						<p><label for= "case_name">New template name: </label><br>
+						<input type="text" value="temp1" id='rule-name' class="form-control input-sm" name="select_temp_name"></p>
+						<p><label for= "report-templatename">Report template name:</label><br>
+						<input type="text" id='template-name' class="form-control input-sm" name="report-template" value="LR13_ALU_20140814_END"></p>
 						<p><label for= "type">Type:</label><br>
 						<input type="text" value='ENODEB' id='otype' class="form-control input-sm" name="type"></p>
 						<p><label for= "eids">Eids:</label><br>
@@ -50,20 +52,14 @@
 						<input type="text" value = "2014.10.29:00.00" id='first-date' class="form-control input-sm"  name="firstdate"></p>
 						<p><label for= "seconddate">Second date: </label><br>
 						<input type="text" value = "2014.10.29:01.00"  id='second-date'  class="form-control input-sm" name="seconddate"></p>
-						<p><label for= "case_name">Rule template name: </label><br>
-						<input type="text" value="test1" id='rule-name' class="form-control input-sm" name="select_temp_name"></p>
+						
 						</br>
 						<!-- <button class = "btn btn-primary" id= "btn-select-template" >Choose Template</button><br></br> -->
-						<button class = "btn btn-primary" id= "btn-query-report" >Generate Report 
+						<button class = "btn btn-primary" id= "btn-create-template" >Create Template 
 						</button>
 					</div>
-				</td>
-				<td  class="empty" >111
-				</td>
-				<td class= "tdiframe" width="50%" heigth="100%" align = "center">
-					<iframe id = "iframe-outdata" class = "textiframe" name="iframe-outdata" frameBorder="5"  src="/iframe_output" width = "900" style="background-color:white"; height="760" margin = "10%" >
-					</iframe>
-				</td>
+	
+
 			</tr>
 		</table>
 	</section>

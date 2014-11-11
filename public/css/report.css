@@ -28,14 +28,78 @@ section#filter-items{
   height:   58em;
 
 }
+section#filter-items div#create-new-template {
+  width:260px;
+  margin-right: 3px;
+  margin-left: 240px
 
-section#filter-items div.select_tabs {
-   width: 100%;
+}
+section#filter-items div#create-new-template input#new-template-name{
+  width:295px;
+  margin-right: 3px;
+  margin-left: 45px
+
+}
+section#filter-items div#create-new-template input#new-report-template-name{
+  width:295px;
+  margin-right: 3px;
+  margin-left: 27px
+
+}
+section#filter-items div#create-new-template input#new-otype{
+  width:295px;
+  margin-right: 3px;
+  margin-left: 165px
+
+}
+section#filter-items div#create-new-template input#new-eid{
+  width:295px;
+  margin-right: 3px;
+  margin-left: 169px
+
+}
+section#filter-items div#create-new-template input#new-first-date{
+  width:295px;
+  margin-right: 3px;
+  margin-left: 128px
+
+}
+section#filter-items div#create-new-template input#new-second-date{
+  width:295px;
+  margin-right: 3px;
+  margin-left: 107px
+
+}
+section#filter-items div#create-new-template button#btn-create-template{
+   margin-left: 145px
+}
+/*html body section#sent_list .sent_list_item .item_for_date {
+  display: inline-block;
+  width: 15%;
+}*/
+div#output-data .item-casename{
+display: inline-block;
+  width: 75%;
+}
+div#output-data .item-outdata{
+display: inline-block;
+  width: 20%;
+}
+div#download-link  {
+/*  display: inline-block;*/
+
+  text-align: center;
+}
+
+section#filter-items table td div#select_tabs {
+   width: 200px;
    border:1px;
    vertical-align: top;
 }
-
-section#filter-items table td.select_param {
+section#filter-items table td button#btn-query-report{
+  width:200px;
+}
+section#filter-items table td#input-param {
    width: 100%;
    border:1px;
    vertical-align: top;
@@ -53,7 +117,7 @@ section#filter-items table td div.input-group{
    border:1px;
    vertical-align: top;
 }
-section#filter-items table td div#input_left{
+/*section#filter-items table td div#input_left{
    width:100%;
    border:1px;
    vertical-align: top;
@@ -62,18 +126,25 @@ section#filter-items table td div#input_right{
    width:100%;
    border:1px;
    vertical-align: top;
-}
+}*/
 
 section#filter-items table td div.input-group input#examp_tmp_name_input {
    width:45.5%;
    border:1px;
    vertical-align: top;
 }
-section#filter-items table td div.input-group input#creat_tmp_name_input {
+/*section#filter-items table td div.input-group input#new-template-name {
    width:72.5%;
    border:1px;
    vertical-align: top;
+}*/
+
+section div#div-template-nav-tabs ul#ul-template-nav-tabs{
+
+  text-align:right;
+  margin-left: 290px;
 }
+
 section#filter-items table td div.examp_tmp_name_input {
 
    border:1px;
@@ -84,9 +155,12 @@ section#filter-items table td.empty {
    text-indent:-5400px;
    width:40px;
 }
-section#filter-items table td div#text_area textarea {
+/*section#filter-items table td div#text_area_left textarea {
  color:#A8A8A8 ;
 }
+section#filter-items table td div#text_area_right textarea {
+ color:#000000 ;
+}*/
 
 /*html body nav {
   width: 90%;

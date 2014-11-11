@@ -31,19 +31,37 @@ define(['model/query.model'], function (query) {
         ruletemplate: ruleTemplate
       };
 
-      query.ajaxGet('/submit', data, function (r) {
+      query.ajax('/submit', 'GET', data, function (r) {
         if (r.result === 'ok') {
           console.log(r.data);
-          var i;
-          iframe.find('#body').html('');
+          iframe.find('#output-data').html('');
+          iframe.find('#download-link').html('');
+          /*var i;
           for(i = 0; i < r.data.length; i += 1){
-             iframe.find('#body').append(r.data[i]+'<br>');
+             iframe.find('#output-data').append(r.data[i]+'<br>');
+          }*/
+          var link = r.link.split('/');
+          var filelink = '/'+link[link.length-2]+'/'+link[link.length-1];
+          iframe.find('#download-link').append($('<a></a>').html('Download File').attr('href',filelink));
+          iframe.find('#output-data').append(
+              $('<li class="list-group-item list-group-item-info"></li>').append(
+                $('<span class="item-casename"></span>').html('Case Name'),
+                $('<span class="item-outdata"></span>').html("Output Data")
+                ));
+          var i;
+          for(i = 0; i < r.data.length; i += 1){
+            iframe.find('#output-data').append(
+              $('<li class="out-data-item list-group-item"></li>').append(
+                $('<span class="item-casename"></span>').html(r.data[i][0]),
+                $('<span class="item-outdata"></span>').html(r.data[i][1])
+                ));
           }
-        } else {
+     } else {
           console.log('err');
         }
       }, this);
     };
+
     this.init = function () {
       /*btn_template.on('click',showDialog);*/
 
