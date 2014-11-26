@@ -15,6 +15,7 @@ define(function () {
         'tagsinput': '//172.24.186.245/jslib/bootstrap/bootstrap-tagsinput-0.3.9/dist/bootstrap-tagsinput',
         'typeahead': '//172.24.186.245/jslib/typeahead.js-0.10.2/dist/typeahead.jquery',
         'bootbox': '//172.24.186.245/jslib/bootstrap/bootbox-4.2.0/bootbox.min',
+        'uploadify':'//172.24.186.245/jslib/jquery/uploadify/jquery.uploadify.min',
         'conn': 'util/conn'
       },
       shim: {

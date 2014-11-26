@@ -6,7 +6,7 @@ var
 
   rules = new mongoose.Schema({
    casename:String,
-   rule:[String],
+   rule:[String]
  }),
   templates = new mongoose.Schema({
     templatename:String,
@@ -18,7 +18,25 @@ var
   Rule = connection.model('rules', rules),
   Template = connection.model('templates', templates);
 
-
+var insertRule = function(rules, length,ruleID, next) {
+  if(length != 0){
+    var insertItem = rules[length - 1];
+    var itemName = insertItem.shift();
+    var ruleItem = new Rule({
+      casename:itemName,
+      rule:insertItem
+    })
+    ruleItem.save(
+      function (err) {
+        ruleID.push(ruleItem._id);
+        insertRule(rules,length - 1, ruleID, function(from){next(from);});
+        next(ruleID);
+      }
+    );
+  } else {
+    next(ruleID);
+  }
+}
 
 var queryRuleByID = function(id, length, rules, next) {
   if(length !== 0){
@@ -56,6 +74,8 @@ var analyzeData = function (tabledata,rules) {
         for(k = 0; (k <= rules[j].rule.length -1) && outSign; k += 1){
           var judgement = rules[j].rule[k];
           var ruleValue = judgement.substr(2,judgement.length - 2);
+/*          console.log("ruleValue:");
+          console.log(ruleValue);*/
           switch(judgement.substr(0,2)){
             case '<<':
               outSign = compareValue(tabledata[i][1],'<<',ruleValue);
@@ -79,7 +99,12 @@ var analyzeData = function (tabledata,rules) {
               outSign = true;
               break;
             case '><':
-              if((tabledata[i][1] == 'N/A')) {
+              if(tabledata[i][1] == 'Nerr') {
+                outSign = true;
+              }
+              break;
+            case '!!':
+              if(tabledata[i][1] == 'N/A') {
                 outSign = true;
               }
               break;
@@ -94,6 +119,8 @@ var analyzeData = function (tabledata,rules) {
       }
     }
   }
+/*  console.log("outData:");
+  console.log(outData);*/
   return outData;
 };
 
@@ -151,9 +178,74 @@ var compareValue = function (arg1, law, arg2) {
       return false; 
   }
   return false;
+};
+
+
+exports.importTemplate = function (name, ruleid, next) {
+/*  async.waterfall([ function(callback){
+    Template.find({'templatename': name},{'rule_collect'})
+            .exec(function (err, data))
+  }])*/
+  Template
+    .update({'templatename':name},
+            {$set:{'rule_collect':ruleid}},
+            {upsert:true},
+    function (err, docs) {
+      next(docs);
+  });
+/*  var templateItem = new Template({
+    templatename:name,
+    rule_collect:ruleid
+  });
+  async.waterfall([ function (callback) {
+    Template
+      .find({'templatename': name})
+      .exec(function (err, data) {
+        console.log('find result');
+        console.log(data);
+        callback(null, data);
+    })
+  }], function (err, data) {
+    console.log(" find template item length:");
+    console.log(data.length);
+    if (data.length > 0){
+      Template
+      .update({'templatename':name},{$set:{'rule_collect':ruleid}},
+      {},
+      function (err, docs) {
+        console.log('err&item1');
+        console.log(err);
+        console.log(Template.db.collection.templatename);
+        console.log(Template.db.schema.templatename);
+        next(docs);
+      });
+    } else {
+      templateItem.save(function (err, item) {
+        console.log('err&item2');
+        console.log(err);
+        console.log(templateItem);
+        next(item);
+      });
+    }
+  }); */
 }
 
-exports.queryTemplateByName = function (tempName, tabledata,next) {
+exports.importRules = function (rules, next){
+  var ruleIDArray = new Array();
+  async.waterfall([
+    function(callback){
+      insertRule(rules,rules.length,ruleIDArray,function(result){
+        callback(null, result);
+      });
+    }
+  ],
+    function (err,result){
+      next(result);     
+    }
+  );
+}
+
+exports.queryTemplateByName = function (tempName, tabledata, next) {
   async.waterfall([
     function(callback){
      Template
@@ -187,21 +279,5 @@ exports.queryTemplateByName = function (tempName, tabledata,next) {
         var outData = analyzeData(tabledata , result);
         next(outData);
       }
-    });
-};
-
-exports.test = function (arg1,arg2) {
-  console.log(arg1);
-  console.log(arg2);
-  Template
-    .find({'templatename': 'temp1'}, '_id templatename rule_collect')
-    .sort('templatename')
-    .exec(function (err, docs) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(docs);
-      return;
     });
 };

@@ -80,10 +80,14 @@ var readCSV = function (path, name){
 
 
 var numToPer = function (numerator, denominator) {
-	var step1 = numerator * 100 / denominator;
-	var step2 = step1.toFixed(2);
-	var per = String(step2) + "%";
-	return per;
+	if(denominator == 0) {
+		return 'Nerr';
+	} else {
+		var step1 = numerator * 100 / denominator;
+		var step2 = step1.toFixed(2);
+		var per = String(step2) + "%";
+		return per;	
+	}
 };
 
 var processData = function (csvdata) {
@@ -163,10 +167,37 @@ var processData = function (csvdata) {
 		}
 	}
 /*	console.log("tabledata:");
-	console.log(tabledata);
-*/	return tabledata;
+	console.log(tabledata);*/
+	return tabledata;
 	
 	
+};
+
+exports.import_rule = function (data) {
+/*	console.log(data);*/
+	async.waterfall([
+		function (callback){
+			var i;
+			var rules = new Array();
+			for (i = 1; i <= data.length -1; i += 1){
+				var tmp = data[i].split(',');
+				rules.push(data[i].split(','));
+			};
+			rule.importRules(rules, function (from){callback(null, from);});
+		},
+		function (rules,callback){
+			console.log(rules);
+			rule.importTemplate(data[0], rules, function (from){
+				console.log("from");
+				console.log(from);
+				callback(null, from);
+			});
+		}
+	],function (err,result){
+		console.log('import result:');
+		console.log(result);
+		/*next(result);*/
+	});
 };
 
 
@@ -199,6 +230,7 @@ exports.run_cmd = function (reporttemplate, type, eid, firstdate, seconddate, ru
 						csvspan.length = csvspan.length - 1;
 						if(csvspan.length > 1)csvdata.push(csvspan);
 					};
+					/*console.log(csvdata);*/
 				callback(null,csvdata);	    			
 				}
 			})
@@ -215,3 +247,19 @@ exports.run_cmd = function (reporttemplate, type, eid, firstdate, seconddate, ru
 		next(result);
 	});
 };
+
+exports.createOutFile = function (outdata, next) {
+	var timestamp = getNowFormatDate() + getNowFormatTime();
+	var i;
+	for (i = 1; i< outdata.length ; i+=1){
+		outdata[i][0] = '\n'+ outdata[i][0];
+	}
+	fs.writeFile(config.outDataFile.path + timestamp+'.csv', outdata, function (err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('file saved!');
+			next(config.outDataFile.path + timestamp+'.csv');
+		}
+	});
+}

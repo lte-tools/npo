@@ -10,7 +10,9 @@
 	<link rel="stylesheet" href="http://172.24.186.245/jslib/bootstrap/bootstrap3.0.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="http://172.24.186.245/jslib/bootstrap/bootstrap3.0.3/dist/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="http://172.24.186.245/jslib/bootstrap/font-awesome/4.0.3/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="http://172.24.186.245/jslib/jquery/uploadify/uploadify.css">
+	<link rel="stylesheet" href="css/import_temp.css">
+
 	<style type="text/css"></style>
 	<title>NPO Viewer</title>
 	<!--[if lt IE 9]>
@@ -33,12 +35,40 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="/">Generate report</a></li>
-					<li><a href="/import_template">Import template</a></li>
-					<li class="active"><a href="/help">About</a></li>
+					<li class="active"><a href="/import_temp">Import template</a></li>
+					<li><a href="/help">About</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<section id= "filter-items" class = "panel panel-default" ><section>
-</body>
-</html>
+	<section id= "filter-items" class = "panel panel-default" >
+		<div id = "creat_blank_temp">
+			<h3 class = "page-header">Create Blank Template</h3>
+			<div id="input_temp_name">	
+		  		<label>Report Template Name:</label>
+		  		<input id="report-template-name" placeholder="LR13_ALU_20140814_END">
+		  		<button id = "create-blank-temp"class = "btn btn-primary">Create Blank Template</button>
+		  	</div>
+		 </div>
+		 <div id = "import_new_temp">
+			<h3 class = "page-header">Import New Template</h3>
+			<div id = "import-templates">
+				<label>Select from files:</label>
+				<input type = "file" id = "upload-file" class="note-image-input" name = "files" >
+				<button id = "upload-template" class = "btn btn-primary">Upload Templates</button>
+			</div>
+		</div>
+		<div id = "view_old_temp">
+			<h3 class = "page-header">View / Modify Old Templates</h3>
+			<div class="list-group">
+				<a href="#" class="list-group-item ">Cras justo odio</a>
+				<a href="file:///e://share/test.txt" target='_blank' class="list-group-item">Dapibus ac facilisis in</a>
+				<a href="#" class="list-group-item">Morbi leo risus</a>
+				<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+				<a href="#" class="list-group-item">Vestibulum at eros</a>
+			</div>
+		</div>
+	</section>
+	</body>
+	<script data-main="/js/import.temp.main" src='//172.24.186.245/jslib/requirejs/require-2.1.10.min.js'>
+	</script>

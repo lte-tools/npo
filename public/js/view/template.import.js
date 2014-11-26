@@ -1,10 +1,9 @@
 define(['model/query.model'], function (query) {
   'use strict';
   var Rule_Template_Import = function () {
-    var btnImportTemplate=$(document).find('#btn-import-template');
-    var ruleText = $(document).find('#rule-text');
-    var ruleTemplateName = $(document).find('#new-template-name');
-  
+    var btnCreateBlankTemp =$(document).find("create-blank-temp");
+    var btnImportTemplate=$(document).find("upload-template");
+
   
     var ruleFormat = function () {
       var uploadTemplate = new Array();
@@ -31,9 +30,12 @@ define(['model/query.model'], function (query) {
         }
       }, this);      
     }
+    var createBlankTemp = function () {
+
+    }
     this.init = function () {
+      btnCreateBlankTemp.on('click',createBlankTemp);
       btnImportTemplate.on('click', ruleFormat);
-    //var template = document.getElementById('right_area');
     };
   };
   return new Rule_Template_Import();
